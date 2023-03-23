@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/nouislider.min.css">
+    <link href="../static/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>IMDB Movie Analysis</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"> <i class="fa-solid fa-film"></i> Movie Data Analysis</a>
+        </div>
+    </nav>
+
+    <div class="container ps-5 pe-5 pb-5 mt-5 mb-5 pt-3 bg-light">
+
+        <div class="row mt-4">
+            <div class="col-md-10"></div>
+            <div class="col-md-2 text-end">
+
+                <button type="button" data-bs-toggle="collapse" aria-controls="collapseControlPanel" role="button"
+                    aria-expanded="false" href="#collapseControlPanel" class="btn btn-primary btn-turquoise w-100"> <i
+                        class="fa-solid fa-gear"></i> Control
+                    Panel</button>
+            </div>
+        </div>
+        <div class="collapse" id="collapseControlPanel">
+            <div class="row mt-5 control-panel">
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4> Ratings: </h4>
+                        </div>
+                    </div>
+                    <div class="row" id="ratings"></div>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4> Genres: </h4>
+                        </div>
+                    </div>
+                    <div class="row" id="genres"></div>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Year: </h4>
+                        </div>
+                    </div>
+                    <div class="row" id="year-range">
+                        <div class="col-md-12">
+                            <div id="slider-snap"></div>
+                            <div class="year-values">
+                                <span id="year-start"></span> to
+                                <span id="year-end"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Comparison: </h4>
+                        </div>
+                    </div>
+                    <div id="comparison">
+                        <div class="form-check">
+                            <input class="form-check-input comparison" type="radio" name="options" id="score-year"
+                                value="Score-Year" val1="score" val2="year">
+                            <label class="form-check-label" for="score-year">Score-Year</label>
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input comparison" type="radio" name="options" id="runtime-votes"
+                                value="Runtime-Votes" val1="votes" val2="runtime">
+                            <label class="form-check-label" for="runtime-votes">
+                                Runtime-Votes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input comparison" type="radio" name="options" id="rating-votes"
+                                value="Rating-Votes" val1="votes" val2="score">
+                            <label class="form-check-label" for="rating-votes">
+                                Score-Votes
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input comparison" type="radio" name="options" id="rating-score"
+                                value="Rating-Score" val1="runtime" val2="score">
+                            <label class="form-check-label" for="rating-score">
+                                Runtime-Score
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input comparison" type="radio" name="options" id="score-rating"
+                                value="Rating-Score" val1="gross" val2="budget">
+                            <label class="form-check-label" for="score-rating">
+                                Score-Rating
+                            </label>
+                        </div>
+                        <span id="validation"></span>
+                    </div>
+
+                    <div class="row mt-4 pt-2 average-div">
+                        <div class="col-md-12">
+                            <h4>Calculate Average?</h4>
+                        </div>
+                        <div id="calculate-average">
+                            <div class="">
+                                <input class="form-check-input" type="checkbox" value="average">
+                                <label class="form-check-label" for="average">Yes</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-8 col-xl-9">
+                        <div> <i class="fa-solid fa-toggle-on toggle-brush"></i> Brush </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-3 text-end">
+                        <button type="button" class="btn btn-primary btn-turquoise w-100" id="generate_graph"> <i
+                                class="fa-solid fa-play"></i> Generate
+                            Graph</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-2">
+
+            <div class="col-md-6 col-lg-6 col-xl-6 graph_container">
+
+                <div id="scatterplot_dataviz"></div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6 graph_container">
+                <div id="biplot_dataviz">
+
+                </div>
+            </div>
+        </div>
+        <div class="row  mt-5">
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="table-container">
+
+
+                    <table class="table table-hover">
+                        <thead class="table-turquoise">
+                            <tr>
+                                <th scope="col" class="t-head">name</th>
+                                <th scope="col" class="t-head">rating</th>
+                                <th scope="col" class="t-head">genre</th>
+                                <th scope="col" class="t-head">year</th>
+
+                                <th scope="col" class="t-head">released</th>
+                                <th scope="col" class="t-head">score</th>
+                                <th scope="col" class="t-head">votes</th>
+                                <th scope="col" class="t-head">director</th>
+
+                                <th scope="col" class="t-head">writer</th>
+                                <th scope="col" class="t-head">star</th>
+                                <th scope="col" class="t-head">country</th>
+                                <th scope="col" class="t-head">budget</th>
+
+                                <th scope="col" class="t-head">gross</th>
+                                <th scope="col" class="t-head">company</th>
+                                <th scope="col" class="t-head">runtime</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-xl-6 map-container">
+                <div id="world-heatmap"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/e6d557bb5d.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.js"
+        integrity="sha512-Dqm3h1Y4qiHUjbhxTuBGQsza0Tfppn53SHlu/uj1f+RT+xfShfe7r6czRf5r2NmllO2aKx+tYJgoxboOkn1Scg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/perliedman-leaflet-control-geocoder/2.4.0/Control.Geocoder.min.js"
+        integrity="sha512-Pwbi+LtFQRtPHuYkIIwns8XTgCPEV2Eqp4Sk/JovY+pbG6buhvnOfqKLXzo08GvodwJbBu+y3omGBAj4F4Xyig=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/js/nouislider.min.js"></script>
+    <script src="../static/js/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/topojson.min.js"></script>
+    <script src="../static/js/d3.v7.min.js"></script>
+    <script src="../static/js/biplot-chart.js"></script>
+    <script src="../static/js/d3-scatter-plot.js"></script>
+    <script src="../static/js/world-heatmap.js"></script>
+    <script src="../static/js/script.js"></script>
+
+</body>
+
+</html>

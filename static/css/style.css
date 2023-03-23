@@ -1,0 +1,195 @@
+@import url('./OpenSans/OpenSans-Medium.ttf');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-image: url(/static/images/tile-bg.jpg);
+  background-attachment: fixed;
+}
+
+.row.mt-5.control-panel {
+  padding: 20px 20px;
+  box-shadow: 0px 0px 3px 1px #e0e0e0;
+  border-radius: 5px;
+}
+
+.year-values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+div#scatterplot_dataviz {
+  display: block;
+}
+
+svg#dotmap_dataviz {
+  /* min-height: 700px; */
+  width: 100%;
+  display: block;
+}
+
+div#dotmap_dataviz {
+  border: 1px solid #ccc;
+}
+
+#dotmap_dataviz path {
+  fill: #ebebeb;
+  stroke: black;
+  stroke-opacity: 0.2;
+}
+
+.form-range input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #007bff;
+  margin-top: -6px;
+}
+
+.form-range input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #007bff;
+}
+
+.form-range input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  background-color: #ddd;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.form-range input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  background-color: #ddd;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.dot {
+  fill: #4285F4;
+  opacity: 0.8;
+}
+
+.average-div {
+  border-top: 1px solid #ccc;
+}
+
+span#validation {
+  color: #ff3333;
+}
+
+.btn-turquoise {
+  background: #3FB8AF;
+  border: #3FB8AF;
+}
+
+.btn-turquoise:hover {
+  background: #559994;
+}
+
+.btn-turquoise:focus {
+  background-color: #3FB8AF;
+  border-color: #3FB8AF;
+  box-shadow: 0 0 0 0.25rem rgb(63 184 175 / 50%);
+}
+
+.graph_container {
+  background-image: url('/static/images/graph_placeholder.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* width: 100%; */
+  /* height: ; */
+}
+
+.brush .overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.brush .selection {
+  fill: rgba(0, 0, 255, 0.2);
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #999;
+  font-size: 12px;
+}
+
+
+.table-container {
+  overflow-x: scroll;
+  max-height: 600px;
+}
+
+.table {
+  position: relative;
+}
+
+th.t-head {
+  text-transform: capitalize;
+  font-weight: 100;
+}
+
+td {
+  vertical-align: initial;
+  width: 1%;
+  white-space: nowrap;
+}
+
+thead.table-turquoise {
+  --bs-table-bg: #3FB8AF !important;
+  color: white;
+  border: none;
+
+  position: sticky;
+  top: 0;
+}
+
+i.fa-solid.toggle-brush {
+  color: #3FB8AF;
+  font-size: 25px;
+}
+
+.map-container {
+  background: url(../images/world-map-grey.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.gradient {
+  animation-duration: 1.8s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #fafafa 8%, #f4f4f4 38%, #fafafa 54%);
+  background-size: 1000px 640px;
+  
+  position: relative;
+  
+}
+
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
