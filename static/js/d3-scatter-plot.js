@@ -4,7 +4,7 @@ var width = $('.graph_container').width();
 var height = width;
 var spacing = 120;
 
-function makeScatterPlot(data1) {
+function makeScatterPlot(data1, compareAverage) {
     let data = data1
 
     d3.select("body")
@@ -166,12 +166,14 @@ function makeScatterPlot(data1) {
                     return selected.includes(d) ? "#2f8aa8" : "#3FB8AF";
                 });
 
-            populateTable(selected)
-            makeProcessedBiplot(selected)
+            if (!compareAverage) {
+                populateTable(selected)
+                makeProcessedBiplot(selected)
+            }
+
         }
     }
 }
-
 
 function populateTable(selected) {
     const table = document.querySelector('.table-body');

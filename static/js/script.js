@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    let compare_average = false
     setTimeout(() => {
 
     }, 200)
@@ -112,6 +113,8 @@ $(document).ready(function () {
         window.yAxisLabel = comparison1
         window.xAxisLabel = comparison2
 
+        compare_average = compareAverage
+
         if (validated) {
             fetch('/movie-filters', {
                 method: 'POST',
@@ -122,7 +125,7 @@ $(document).ready(function () {
             })
                 .then(response => response.json())
                 .then(responseText => {
-                    makeScatterPlot(JSON.parse(responseText))
+                    makeScatterPlot(JSON.parse(responseText), compareAverage)
                 })
                 .catch(error => console.error(error));
 

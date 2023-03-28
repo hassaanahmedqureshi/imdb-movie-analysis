@@ -70,7 +70,6 @@ function drawMap(data) {
                 .attr("d", path)
                 .style("fill", d => {
                     if (d.value != 0) {
-                        console.log(d);
                         return colorScale(d.value)
                     }
                     return '#ccc'

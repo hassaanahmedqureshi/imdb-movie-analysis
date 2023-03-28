@@ -16,8 +16,10 @@ app = Flask(__name__)
 
 # Reading data
 data_df = pd.read_csv("static/data/movies.csv")
-data_df['country'] = data_df['country'].replace('United States', 'United States of America')
-print(data_df['country'].unique())
+data_df['country'] = data_df['country'].replace(
+    'United States', 'United States of America')
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -64,7 +66,6 @@ def json_data():
         start_year, end_year, inclusive=True)]
 
     if not data['compareAverage']:
-        # print(filtered_df)  # Prints the JSON data sent from the front-end
         filtered_df = json.dumps(filtered_df.fillna(
             method='ffill').drop_duplicates().to_dict(orient='records'))
 
@@ -80,8 +81,6 @@ def json_data():
         filtered_df = json.dumps(filtered_df.to_dict(orient='records'))
 
         return jsonify(filtered_df)
-
-#  WARNING! Code above is not to be touched!!! It is final!
 
 
 @app.route("/processdata", methods=['POST'])
