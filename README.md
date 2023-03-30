@@ -17,4 +17,4 @@ python -m flask
 
 ## Developed By
 
-Hassaan Qureshi, Masters Student, Sapienza University of Rome.
+Hassaan Qureshi (1906852), Masters Student, Sapienza University of Rome.
